@@ -11,21 +11,29 @@ function	TaskList()
 		dispatch(deleteTask(id));
 	};
 	return (
-		<div>
-			<header>
+		<div className="w-4/6">
+			<header className="flex justify-between item-center py-4">
 				<h1>Tickets {tasks.length}</h1>
-				<Link to='create-task'>
+				<Link to='create-task' className="bg-indigo-600 px-2 py-1 rounded-sm text-sm">
 					Create Ticket
 				</Link>
 			</header>
+			<div className="grid grid-cols-3 gap-4 ">
 			{tasks.map(task => (
-				<div key={task.id}>
-					<h3>{task.title}</h3>
+				<div key={task.id} className="bg-neutral-800 p-4 rounded-md">
+					<header className="flex justify-between">
+						<h3>{task.title}</h3>
+						<div className="flex">
+							<button onClick={() => handleDelete(task.id)}
+								className="bg-green-500 px-2 py-1 text-xs rounded-md self-center"
+								>Delete Task</button>
+							<Link to={`/edit-task/${task.id}`}>Edit</Link>
+						</div>
+					</header>
 					<p>{task.description}</p>
-					<button onClick={() => handleDelete(task.id)}>Delete Task</button>
-					<Link to={`/edit-task/${task.id}`}>Edit</Link>
 				</div>
 			))}
+			</div>
 		</div>
 	)
 }
